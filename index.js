@@ -33,6 +33,7 @@ var data = {
             .fail(function(e) {
                 // error
                 console.dir(e);
+                // TO: Error Messaging
               })
             .always(function(e) {
                 // finished

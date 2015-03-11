@@ -37,6 +37,9 @@
     font-size: 4vw;
     width: 30vw;
   }
+  input {
+    font-size: 2vw;
+  }
   button span {
     display: inline-block;
     -webkit-animation: wait infinite 1s steps(8, end);
