@@ -158,12 +158,12 @@
       },
 
       translate: function(text) {
-          var translation = "https://www.googleapis.com/language/translate/v2?key=" + +
-              "sl=" + $('#language').val() +
-              "&tl=" + $('#tolanguage').val() +
+          var translation = "https://www.googleapis.com/language/translate/v2?key=" + "AIzaSyDZ02yQNcoPDtrOqqwBX-8FzOdtWKf6IB0" +
+              "&source=" + $('#language').val() +
+              "&target=" + $('#tolanguage').val() +
               "&dt=t&q=" + encodeURIComponent(text);
 
-            var script = document.getElementById('tempJS');
+            /*( var script = document.getElementById('tempJS');
             if(script) {
               script.parentNode.removeChild(script);
             }
@@ -171,7 +171,31 @@
             script.setAttribute('id', 'tempJS');
             script.setAttribute('type', 'text');
             script.src = translation;
-            document.body.appendChild(script);
+            document.body.appendChild(script);*/
+
+            var request = $.ajax(translation, function(e) {
+                // successfully sent
+                console.log('request');
+                console.dir(e);
+              })
+            .done(function(e) {
+                // response received
+
+                console.log('done');
+                console.dir(e);
+                //app.acceptResponse(e);
+              })
+            .fail(function(e) {
+                // error
+                console.log('fail');
+                console.dir(e);
+              })
+            .always(function(e) {
+                // finished
+                console.log('always');
+                //app.revertButton();
+                //console.log('');
+            });
       }
 
   }
