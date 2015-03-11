@@ -182,7 +182,8 @@
               })
             .done(function(e) {
                 // response received
-                app.displayResults(e, 'translation');
+                console.dir(e);
+                app.displayResults(data.translations[0].translatedText, 'translation');
               })
             .fail(function(e) {
                 // error
