@@ -33,6 +33,12 @@
     justify-content: space-around;
     align-items: center;
   }
+  article {
+    display: flex;
+  }
+  article div {
+    font-size: 2rem;
+  }
   button {
     border: none;
     -webkit-appearance: none;
@@ -88,6 +94,7 @@
 <article>
   <div id="response"></div>
   <div id="translation"></div>
+  <div id="reversetranslation"></div>
 </article>
 <script src="jquery.js"></script>
 <script>
@@ -158,8 +165,8 @@
       },
 
       translate: function(text, reverse) {
-          var from = 'en' //$('#language').val();
-          var to = 'es' //$('#tolanguage').val();
+          var from = $('#language').val().substr(0,2);
+          var to = $('#tolanguage').val().substr(0,2);
           if (from == to) {
             to = "ch-zh";
           }
@@ -172,11 +179,10 @@
               "&source=" + from +
               "&target=" + to +
               "&q=" + encodeURIComponent(text);
-          app.handleTranlation(translation, reverse);
+          app.handleTranslation(translation, reverse);
       },
 
-      handleTranlation: function (url) {
-
+      handleTranslation: function (url, reverse) {
             var request = $.ajax(url, function(e) {
                 // successfully sent
               })
@@ -184,13 +190,20 @@
                 // response received
                 console.dir(e);
                 global = e;
-                app.displayResults(e.data.translations[0].translatedText, 'translation');
+                if(reverse) {
+                  app.displayResults(e.data.translations[0].translatedText, 'reversetranslation');
+                } else {
+                  app.displayResults(e.data.translations[0].translatedText, 'translation');
+                }
               })
             .fail(function(e) {
                 // error
                 console.dir(e);
               })
             .always(function(e) {
+                if(!reverse) {
+                  app.translate(e.data.translations[0].translatedText, true);
+                }
                 // finished
             });
       }
