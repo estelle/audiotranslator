@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Lyrinė Vertėjas</title>
+  <style>
+  body {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 300px;
+    padding: 0; margin: 0;
+    height: 100%;
+
+    text-align: center;
+  }
+  body, button {
+    font-family: "HP Simplified", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  header {
+    background-color: #0096D6;
+  }
+  h1, button {
+    color: white;
+    background-color: #0096D6;
+    text-shadow: 3px 3px rgba(0,0,0,0.2);
+  }
+  h1 {
+    line-height: 30vh;
+    font-size: 8vw;
+  }
+  p {
+  }
+  button {
+    border: none;
+    -webkit-appearance: none;
+    font-size: 4vw;
+    width: 30vw;
+  }
+  button span {
+    display: inline-block;
+    -webkit-animation: wait infinite 1s steps(8, end);
+    animation: wait infinite 2s steps(8, end);
+  }
+  @-webkit-keyframes wait {
+    100% {-webkit-transform: rotate(360deg);}
+  }
+  @keyframes wait {
+    100% {transform: rotate(360deg);}
+  }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Lyrinė Vertėjas</h1>
+</header>
+<main>
+<p><button id="doThis">Do it!</button></p>
+<div id="response"></div>
+</main>
+<script src="js/third-party-js/jquery-2.1.1.min.js"></script>
+<script>
+
+    var data = {
+      'url': 'http://standardista.com/tet.wav',
+      'apikey': '7ed75927-9aa2-4a5f-a578-1c753fdc0b60',
+      'request_url' : 'https://api.idolondemand.com/1/api/sync/recognizespeech/v1',
+      'button' : $('#doThis').text()
+    };
+
+  $('#doThis').on('click', function(){
+      app.submitToHP();
+      app.changeButton();
+    });
+
+  var app = {
+
+      submitToHP : function () {
+
+        var query = data.request_url + '?';
+            query  += "&url=" + encodeURIComponent(data.url);
+            query  += "&apikey=" + data.apikey;
+
+        var request = $.ajax(query, function(e) {
+                // successfully sent
+
+              })
+            .done(function(e) {
+                // response received
+                app.acceptResponse(e);
+              })
+            .fail(function(e) {
+                // error
+                console.dir(e);
+              })
+            .always(function(e) {
+                // finished
+                app.revertButton();
+            });
+      },
+
+      acceptResponse : function (data) {
+          var response;
+          // get response
+          response = data.document[0].content;
+          // massage data
+
+          // display response
+          app.displayResults(response);
+
+      },
+
+      displayResults: function (result) {
+          var container = document.getElementById('response');
+          container.innerHTML = result;
+      },
+
+      changeButton: function () {
+          var button = document.getElementById('doThis');
+          button.innerHTML = '<span>|</span>';
+      },
+
+      revertButton: function () {
+          var button = document.getElementById('doThis');
+          button.innerHTML = data.button;
+      }
+  }
+  </script>
+</body>
+</html>
