@@ -79,12 +79,12 @@
   <section class="file">
     <label>To Language:
       <select name="tolanguage" id="tolanguage">
+        <option value="it-IT">Italiano</option>
         <option value="en-US">English (US)</option>
         <option value="en-GB">English (UK)</option>
         <option value="de-DE">German</option>
         <option value="es-ES">Español</option>
         <option value="fr-FR">Français</option>
-        <option value="it-IT">Italiano</option>
       </select>
     </label>
   </section>
@@ -98,7 +98,7 @@
 <script>
 
     var data = {
-      'url': 'http://estelle.github.io/audiotranslator/data/tet.wav',
+      'url': 'http://estelle.github.io/audiotranslator/data/rudolph.wav',
       'apikey': '7ed75927-9aa2-4a5f-a578-1c753fdc0b60',
       'request_url' : 'https://api.idolondemand.com/1/api/sync/recognizespeech/v1',
       'button' : $('#doThis').text()
@@ -166,7 +166,7 @@
           var from = $('#language').val().substr(0,2);
           var to = $('#tolanguage').val().substr(0,2);
           if (from == to) {
-            to = "ch";
+            to = "cz";
           }
           if(reverse) {
             var temp = from;
