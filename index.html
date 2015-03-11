@@ -184,7 +184,7 @@
                 // response received
                 console.dir(e);
                 global = e;
-                app.displayResults(data.translations[0].translatedText, 'translation');
+                app.displayResults(e.data.translations[0].translatedText, 'translation');
               })
             .fail(function(e) {
                 // error
