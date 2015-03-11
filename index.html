@@ -90,7 +90,6 @@
   <div id="translation"></div>
 </article>
 <script src="jquery.js"></script>
-<script src="test.js"></script>
 <script>
 
     var data = {
@@ -159,7 +158,10 @@
       },
 
       translate: function(text) {
-          var translation = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + $('#language').val()+ "&tl=" + $('#tolanguage').val() + "&dt=t&q=" + encodeURIComponent(text);
+          var translation = "https://www.googleapis.com/language/translate/v2?key=" + +
+              "sl=" + $('#language').val() +
+              "&tl=" + $('#tolanguage').val() +
+              "&dt=t&q=" + encodeURIComponent(text);
 
             var script = document.getElementById('tempJS');
             if(script) {
@@ -167,6 +169,7 @@
             }
             script = document.createElement('script');
             script.setAttribute('id', 'tempJS');
+            script.setAttribute('type', 'text');
             script.src = translation;
             document.body.appendChild(script);
       }
