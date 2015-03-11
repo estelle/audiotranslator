@@ -90,10 +90,11 @@
   <div id="translation"></div>
 </article>
 <script src="jquery.js"></script>
+<script src="test.js"></script>
 <script>
 
     var data = {
-      'url': 'http://estelle.github.io/audiotranslator/data/rudolph.wav',
+      'url': 'http://estelle.github.io/audiotranslator/data/tet.wav',
       'apikey': '7ed75927-9aa2-4a5f-a578-1c753fdc0b60',
       'request_url' : 'https://api.idolondemand.com/1/api/sync/recognizespeech/v1',
       'button' : $('#doThis').text()
@@ -115,12 +116,10 @@
 
         var request = $.ajax(query, function(e) {
                 // successfully sent
-
               })
             .done(function(e) {
                 // response received
                 app.acceptResponse(e);
-
               })
             .fail(function(e) {
                 // error
@@ -161,7 +160,15 @@
 
       translate: function(text) {
           var translation = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + $('#language').val()+ "&tl=" + $('#tolanguage').val() + "&dt=t&q=" + encodeURIComponent(text);
-          var lang = $.get
+
+            var script = document.getElementById('tempJS');
+            if(script) {
+              script.parentNode.removeChild(script);
+            }
+            script = document.createElement('script');
+            script.setAttribute('id', 'tempJS');
+            script.src = translation;
+            document.body.appendChild(script);
       }
 
   }
