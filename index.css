@@ -27,6 +27,9 @@
     justify-content: space-around;
     align-items: center;
   }
+  section {
+    flex: 1;
+  }
   article div {
     font-size: 2rem;
     padding: 1em;
