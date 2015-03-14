@@ -73,7 +73,7 @@ var data = {
       },
 
       translationsSetUp: function (text) {
-        data.languages[0] = $('#lang').val(); // assign originating language to array of languages
+        data.languages[0] = $('#lang').val().substr(0,2); // assign originating language to array of languages
         data.languages[data.languages.length - 1] = data.languages[0];
         app.translateMultipleTimes(text);
         data.count = 0;
@@ -82,8 +82,10 @@ var data = {
       translateMultipleTimes: function (text){
         var googleUrl, to, from; // vars
         to = data.languages[data.count];
+        console.log('TO: ' + to);
         data.count++;
         from = data.languages[data.count];
+        console.log('FROm: ' + from);
 
         googleUrl = app.translateUrl(text, to, from);
 
@@ -113,7 +115,7 @@ var data = {
               })
             .fail(function(e) {
                 // error
-                console.log('Error: ')
+                console.log('Error: ');
                 console.dir(e);
               })
             .always(function(e) {
