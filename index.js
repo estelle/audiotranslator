@@ -74,25 +74,23 @@ var data = {
 
       translationsSetUp: function (text) {
         data.languages[0] = $('#lang').val().substr(0,2); // assign originating language to array of languages
-        data.languages[data.languages.length - 1] = data.languages[0];
+        data.languages[data.languages.length - 1] = $('#lang').val().substr(0,2);
         app.translateMultipleTimes(text);
         data.count = 0;
       },
 
       translateMultipleTimes: function (text){
         var googleUrl, to, from; // vars
-        to = data.languages[data.count];
-        console.log('TO: ' + to);
-        data.count++;
         from = data.languages[data.count];
-        console.log('FROm: ' + from);
-
+        data.count++;
+        to = data.languages[data.count];
         googleUrl = app.translateUrl(text, to, from);
 
         app.handleTranslation(googleUrl);
       },
 
       translateUrl: function(text, to, from) {
+
           return "https://www.googleapis.com/language/translate/v2?key=" + "AIzaSyDZ02yQNcoPDtrOqqwBX-8FzOdtWKf6IB0" +
               "&source=" + from +
               "&target=" + to +
@@ -105,9 +103,8 @@ var data = {
               })
             .done(function(e) {
                 // response received
-                console.dir(e);
                 global = e;
-                if(data.count == data.languages.length) { // last translation occurred
+                if(data.count == (data.languages.length - 1)) { // last translation occurred
                   app.displayResults(e.data.translations[0].translatedText, 'translation');
                 } else {
                   app.translateMultipleTimes(e.data.translations[0].translatedText);
@@ -116,10 +113,9 @@ var data = {
             .fail(function(e) {
                 // error
                 console.log('Error: ');
-                console.dir(e);
+                console.dir(e.statusText);
               })
             .always(function(e) {
-                console.log(url);
                 // finished
             });
       }
