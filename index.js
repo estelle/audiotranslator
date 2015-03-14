@@ -3,7 +3,7 @@ var data = {
   'apikey': '7ed75927-9aa2-4a5f-a578-1c753fdc0b60',
   'request_url' : 'https://api.idolondemand.com/1/api/sync/recognizespeech/v1',
   'button' : $('#doThis').text(),
-  'languages' : ['', 'fr', 'de', 'es', 'li', 'ru', ''],
+  'languages' : ['', 'fr', 'de', 'es', 'vi', 'ru', ''],
   'count' : 0
 };
 
