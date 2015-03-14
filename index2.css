@@ -1,0 +1,53 @@
+  body {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 300px;
+    padding: 0; margin: 0;
+    height: 100%;
+
+    text-align: center;
+  }
+  body, button, input {
+    font-family: "HP Simplified", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  header {
+    background-color: #0096D6;
+  }
+  h1, button {
+    color: white;
+    background-color: #0096D6;
+    text-shadow: 3px 3px rgba(0,0,0,0.2);
+  }
+  h1 {
+    line-height: 30vh;
+    font-size: 8vw;
+  }
+  main, article {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  article div {
+    font-size: 2rem;
+    padding: 1em;
+  }
+  button, input {
+    border: none;
+    -webkit-appearance: none;
+    font-size: 4vw;
+    width: 30vw;
+  }
+  input {
+    font-size: 2vw;
+  }
+  button span {
+    display: inline-block;
+    -webkit-animation: wait infinite 1s steps(8, end);
+    animation: wait infinite 2s steps(8, end);
+  }
+  @-webkit-keyframes wait {
+    100% {-webkit-transform: rotate(360deg);}
+  }
+  @keyframes wait {
+    100% {transform: rotate(360deg);}
+  }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <title>Lyrinė Vertėjas</title>
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="index2.css">
 </head>
 <body>
 <header>
@@ -11,7 +11,7 @@
 </header>
 <main>
   <section class="language">
-    <label>Original Language:
+    <label>Language:
       <select name="language" id="language">
         <option value="en-US">English (US)</option>
         <option value="en-GB">English (UK)</option>
@@ -32,7 +32,16 @@
     </datalist>
   </section>
   <section class="file">
-
+    <label>To Language:
+      <select name="tolanguage" id="tolanguage">
+        <option value="it-IT">Italiano</option>
+        <option value="en-US">English (US)</option>
+        <option value="en-GB">English (UK)</option>
+        <option value="de-DE">German</option>
+        <option value="es-ES">Español</option>
+        <option value="fr-FR">Français</option>
+      </select>
+    </label>
   </section>
 </main>
 <article>
@@ -41,6 +50,6 @@
   <div id="reversetranslation"></div>
 </article>
 <script src="jquery.js"></script>
-<script src="index.js"></script>
+<script src="index2.js"></script>
 </body>
 </html>

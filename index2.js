@@ -1,10 +1,8 @@
 var data = {
-  'url': 'http://estelle.github.io/audiotranslator/data/tet.wav',
+  'url': 'http://estelle.github.io/audiotranslator/data/rudolph.wav',
   'apikey': '7ed75927-9aa2-4a5f-a578-1c753fdc0b60',
   'request_url' : 'https://api.idolondemand.com/1/api/sync/recognizespeech/v1',
-  'button' : $('#doThis').text(),
-  'languages' : ['', 'fr', 'de', 'es', 'cz', 'ru', ''],
-  'count' : 0
+  'button' : $('#doThis').text()
 };
 
 
@@ -18,7 +16,6 @@ var data = {
         });
       },
 
-      // get the words from the original media file
       submitToHP : function () {
         data.url = $('#url').val() || data.url;
         var query = data.request_url + '?';
@@ -36,7 +33,6 @@ var data = {
             .fail(function(e) {
                 // error
                 console.dir(e);
-                app.acceptResponse('Oops, something went wrong.')
                 // TO: Error Messaging
               })
             .always(function(e) {
@@ -53,7 +49,7 @@ var data = {
 
           // display response
           app.displayResults(response, 'response');
-          app.translationsSetUp(response);
+          app.translate(response);
 
       },
 
@@ -72,32 +68,25 @@ var data = {
           button.innerHTML = data.button;
       },
 
-      translationsSetUp: function (text) {
-        data.languages[0] = $('#lang').val(); // assign originating language to array of languages
-        data.languages[data.languages.length - 1] = data.languages[0];
-        app.translateMultipleTimes(text);
-        data.count = 0;
-      },
-
-      translateMultipleTimes: function (text){
-        var googleUrl, to, from; // vars
-        to = data.languages[data.count];
-        data.count++;
-        from = data.languages[data.count];
-
-        googleUrl = app.translateUrl(text, to, from);
-
-        app.handleTranslation(googleUrl);
-      },
-
-      translateUrl: function(text, to, from) {
-          return "https://www.googleapis.com/language/translate/v2?key=" + "AIzaSyDZ02yQNcoPDtrOqqwBX-8FzOdtWKf6IB0" +
+      translate: function(text, reverse) {
+          var from = $('#language').val().substr(0,2);
+          var to = $('#tolanguage').val().substr(0,2);
+          if (from == to) {
+            to = "cz";
+          }
+          if(reverse) {
+            var temp = from;
+                from = to;
+                to = temp;
+          }
+          var translation = "https://www.googleapis.com/language/translate/v2?key=" + "AIzaSyDZ02yQNcoPDtrOqqwBX-8FzOdtWKf6IB0" +
               "&source=" + from +
               "&target=" + to +
               "&q=" + encodeURIComponent(text);
+          app.handleTranslation(translation, reverse);
       },
 
-      handleTranslation: function (url) {
+      handleTranslation: function (url, reverse) {
             var request = $.ajax(url, function(e) {
                 // successfully sent
               })
@@ -105,11 +94,10 @@ var data = {
                 // response received
                 console.dir(e);
                 global = e;
-                if(data.count == (data.languages.length - 1)) { // last translation occurred
-                  app.displayResults(e.data.translations[0].translatedText, 'translation');
-
+                if(reverse) {
+                  app.displayResults(e.data.translations[0].translatedText, 'reversetranslation');
                 } else {
-                  app.translateMultipleTimes(e.data.translations[0].translatedText);
+                  app.displayResults(e.data.translations[0].translatedText, 'translation');
                 }
               })
             .fail(function(e) {
