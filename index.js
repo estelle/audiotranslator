@@ -1,5 +1,5 @@
 var data = {
-  'url': 'http://estelle.github.io/audiotranslator/data/tet.wav',
+  'url': 'http://estelle.github.io/audiotranslator/data/rudolph.wav',
   'apikey': '7ed75927-9aa2-4a5f-a578-1c753fdc0b60',
   'request_url' : 'https://api.idolondemand.com/1/api/sync/recognizespeech/v1',
   'button' : $('#doThis').text(),
