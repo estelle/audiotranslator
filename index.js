@@ -103,17 +103,16 @@ var data = {
               })
             .done(function(e) {
                 // response received
-                global = e;
                 if(data.count == (data.languages.length - 1)) { // last translation occurred
                   app.displayResults(e.data.translations[0].translatedText, 'translation');
+                  data.count = 0;
                 } else {
                   app.translateMultipleTimes(e.data.translations[0].translatedText);
                 }
               })
             .fail(function(e) {
                 // error
-                console.log('Error: ');
-                console.dir(e.statusText);
+                app.displayResults('Error: ' +  e.statusText, 'translation');
               })
             .always(function(e) {
                 // finished
