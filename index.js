@@ -107,19 +107,17 @@ var data = {
                 global = e;
                 if(data.count == (data.languages.length - 1)) { // last translation occurred
                   app.displayResults(e.data.translations[0].translatedText, 'translation');
-
                 } else {
                   app.translateMultipleTimes(e.data.translations[0].translatedText);
                 }
               })
             .fail(function(e) {
                 // error
-                console.log('Error: ' + e);
+                console.log('Error: ')
+                console.dir(e);
               })
             .always(function(e) {
-                if(!reverse) {
-                  app.translate(e.data.translations[0].translatedText, true);
-                }
+                console.log(url);
                 // finished
             });
       }
