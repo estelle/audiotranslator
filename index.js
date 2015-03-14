@@ -107,7 +107,7 @@ var data = {
                 // response received
                 console.dir(e);
                 global = e;
-                if(data.count == (data.languages.length - 1)) { // last translation occurred
+                if(data.count == data.languages.length) { // last translation occurred
                   app.displayResults(e.data.translations[0].translatedText, 'translation');
                 } else {
                   app.translateMultipleTimes(e.data.translations[0].translatedText);
