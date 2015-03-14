@@ -7,6 +7,11 @@
 
     text-align: center;
   }
+ header, article {
+    flex: 3;
+    min-height: 40vh;
+  }
+  footer, main {flex: 1; max-height: 10vh}
   body, button, input {
     font-family: "HP Simplified", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
@@ -42,6 +47,8 @@
   }
   input {
     font-size: 2vw;
+    line-height: 2.4;
+    border: 1px solid rgba(0,0,0,0.2);
   }
   button span {
     display: inline-block;
