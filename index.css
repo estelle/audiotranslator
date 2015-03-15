@@ -61,3 +61,8 @@
   @keyframes wait {
     100% {transform: rotate(360deg);}
   }
+  @media screen and (max-width: 500px) {
+  main, article {
+    flex-wrap: wrap;
+  }
+}
