@@ -12,7 +12,7 @@ var data = {
   var app = {
 
       init : function () {
-          $('#doThis').on('click', function(){
+          document.getElementById('doThis').addEventListener('click', function(){
           app.submitToHP();
           app.changeButton();
         });
@@ -20,18 +20,18 @@ var data = {
 
       // get the words from the original media file
       submitToHP : function () {
-        data.url = $('#url').val() || data.url;
+        data.url = document.getElementById('url').value || data.url;
         var query = data.request_url + '?';
             query  += "&url=" + encodeURIComponent(data.url);
             query  += "&apikey=" + data.apikey;
-            query += "&language=" + ($('#lang').value || "en-US");
+            query += "&language=" + (document.getElementById('lang').value || "en-US");
 
         var request = $.ajax(query, function(e) {
                 // successfully sent
               })
             .done(function(e) {
                 // response received
-                app.acceptResponse(e);
+                app.acceptResponse(e.document[0].content);
               })
             .fail(function(e) {
                 // error
@@ -45,14 +45,10 @@ var data = {
             });
       },
 
-      acceptResponse : function (data) {
-          var response;
-          // get response
-          response = data.document[0].content;
-          // massage data
-
+      acceptResponse : function (response) {
           // display response
           app.displayResults(response, 'response');
+          // start the translation process
           app.translationsSetUp(response);
 
       },
